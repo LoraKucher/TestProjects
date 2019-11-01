@@ -21,6 +21,7 @@ struct UserObject {
 struct SectionData {
     let type: EmployeeType
     let data : [NSManagedObject]
+    let factory: CellFactory
 
     var numberOfItems: Int {
         return data.count
@@ -33,9 +34,10 @@ struct SectionData {
 
 extension SectionData {
     
-    init(type: EmployeeType, data: NSManagedObject...) {
+    init(type: EmployeeType, factory: CellFactory, data: NSManagedObject...) {
         self.type = type
         self.data  = data
+        self.factory = factory
     }
 }
 
@@ -48,13 +50,15 @@ final class ListViewController: UIViewController {
     private lazy var model = ListModel()
     private var isEdit = false
     
-    private lazy var mySections: [SectionData] = {
-        let section1 = SectionData(type: .employee, data: sortedItems(by: .employee))
-        let section2 = SectionData(type: .accountant, data: sortedItems(by: .accountant))
-        let section3 = SectionData(type: .management, data: sortedItems(by: .management))
-
-        return [section1, section2, section3]
-    }()
+    private var mySections: [SectionData] {
+        get {
+            let section1 = SectionData(type: .employee, data: sortedItems(by: .employee), factory: EmployeeFactory())
+            let section2 = SectionData(type: .accountant, data: sortedItems(by: .accountant), factory: AccountantFactory())
+            let section3 = SectionData(type: .management, data: sortedItems(by: .management), factory: ManagementFactory())
+            
+            return [section1, section2, section3]
+        }
+    }
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -146,24 +150,14 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         return proposedDestinationIndexPath
     }
     
-    // TODO: - refactor
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ListTableViewCell else {
             preconditionFailure("cell is nil")
         }
-        switch indexPath.section {
-        case 0:
-            let factory = Factory(factory: EmployeeFactory())
-            factory.addCell(in: cell, with: sortedItems(by: .employee), at: indexPath)
-        case 1:
-            let factory = Factory(factory: AccountantFactory())
-            factory.addCell(in: cell, with: sortedItems(by: .accountant), at: indexPath)
-        case 2:
-            let factory = Factory(factory: ManagementFactory())
-            factory.addCell(in: cell, with: sortedItems(by: .management), at: indexPath)
-        default:
-            return cell
-        }
+        let data = mySections[indexPath.section].data
+        let factory = mySections[indexPath.section].factory
+        factory.addCell(in: cell, with: data, at: indexPath)
+
         return cell
     }
     
