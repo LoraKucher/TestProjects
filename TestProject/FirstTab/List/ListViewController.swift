@@ -22,11 +22,11 @@ struct SectionData {
     let type: EmployeeType
     let data : [NSManagedObject]
     let factory: CellFactory
-
+    
     var numberOfItems: Int {
         return data.count
     }
-
+    
     subscript(index: Int) -> NSManagedObject {
         return data[index]
     }
@@ -64,16 +64,13 @@ final class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getData()
+        addObservers()
         tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: "listCell")
     }
     
-    // TODO: - observe changes!
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        model.fetch { [weak self] in
-            self?.tableView.reloadData()
-        }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Actions
@@ -84,6 +81,16 @@ final class ListViewController: UIViewController {
     }
     
     // MARK: - Private methods
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getData), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
+    }
+    
+    @objc private func getData() {
+        model.fetch { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
+    
     private func sortedItems(by type: EmployeeType) -> [NSManagedObject] {
         return model.items
             .filter { $0.entity.name == type.stringValue.capitalized }
@@ -157,11 +164,12 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let data = mySections[indexPath.section].data
         let factory = mySections[indexPath.section].factory
         factory.addCell(in: cell, with: data, at: indexPath)
-
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showEmployee", sender: nil)
+        let senderObject = mySections[indexPath.section].data[indexPath.row]
+        performSegue(withIdentifier: "showEmployee", sender: senderObject)
     }
 }

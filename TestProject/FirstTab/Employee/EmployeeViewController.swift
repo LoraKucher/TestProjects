@@ -42,6 +42,7 @@ final class EmployeeViewController: UIViewController, EntityUser {
         type.save(newUser: createUser(with: type), and: userObject)
         do {
             try returnContext().save()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadData"), object: nil)
             navigationController?.popViewController(animated: true)
         } catch {
             preconditionFailure("Failed saving")

@@ -66,11 +66,11 @@
         <!--Gallery-->
         <scene sceneID="b7y-Gy-0Ag">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qWY-TM-Sax" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="qWY-TM-Sax" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Gallery" image="photo.fill.on.rectangle.fill" catalog="system" id="ipq-Cv-t14"/>
                     <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3bu-eh-VvH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
