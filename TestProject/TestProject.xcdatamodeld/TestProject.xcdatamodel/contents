@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19A602" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Accountant" representedClassName="Accountant" parentEntity="Employee" syncable="YES" codeGenerationType="class">
+        <attribute name="accountant_type" optional="YES" attributeType="String"/>
+        <relationship name="accountant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Accuntant_type" inverseName="accountant" inverseEntity="Accuntant_type"/>
+    </entity>
+    <entity name="Accuntant_type" representedClassName="Accuntant_type" syncable="YES" codeGenerationType="class">
+        <attribute name="materials" optional="YES" attributeType="String"/>
+        <attribute name="payroll" optional="YES" attributeType="String"/>
+        <relationship name="accountant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Accountant" inverseName="accountant" inverseEntity="Accountant"/>
+    </entity>
+    <entity name="Base_employee" representedClassName="Base_employee" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="salary" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Employee" representedClassName="Employee" parentEntity="Base_employee" syncable="YES" codeGenerationType="class">
+        <attribute name="lunch_time" optional="YES" attributeType="String"/>
+        <attribute name="workplace_number" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Management" representedClassName="Management" parentEntity="Base_employee" syncable="YES" codeGenerationType="class">
+        <attribute name="reception_hours" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Accountant" positionX="81.33984375" positionY="161.08984375" width="128" height="73"/>
+        <element name="Accuntant_type" positionX="257.49609375" positionY="166.80859375" width="128" height="88"/>
+        <element name="Base_employee" positionX="-129.75" positionY="3.4765625" width="143.90234375" height="73"/>
+        <element name="Employee" positionX="80.9765625" positionY="46.703125" width="128" height="73"/>
+        <element name="Management" positionX="82.6875" positionY="-47.91015625" width="128" height="58"/>
+    </elements>
+</model>
