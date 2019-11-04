@@ -14,6 +14,9 @@ final class EmployeeViewController: UIViewController, EntityUser {
     // MARK: - Outlets
     @IBOutlet private weak var tableview: UITableView!
     
+    // MARK: - Public properties
+    var object: NSManagedObject? = nil
+    
     // MARK: - Private properties
     private var type: EmployeeType = .employee
     private var userObject = UserObject()

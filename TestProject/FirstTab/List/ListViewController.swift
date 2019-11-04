@@ -9,38 +9,6 @@
 import UIKit
 import CoreData
 
-struct UserObject {
-    var name: String?
-    var salary: String?
-    var lunchTime: String?
-    var receptionHours: String?
-    var workplaceNumber: String?
-    var accountantType: String?
-}
-
-struct SectionData {
-    let type: EmployeeType
-    let data : [NSManagedObject]
-    let factory: CellFactory
-    
-    var numberOfItems: Int {
-        return data.count
-    }
-    
-    subscript(index: Int) -> NSManagedObject {
-        return data[index]
-    }
-}
-
-extension SectionData {
-    
-    init(type: EmployeeType, factory: CellFactory, data: NSManagedObject...) {
-        self.type = type
-        self.data  = data
-        self.factory = factory
-    }
-}
-
 final class ListViewController: UIViewController {
     
     // MARK: - Private IBOutlets
@@ -105,7 +73,9 @@ final class ListViewController: UIViewController {
     
     // TODO: - send object
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // send object
+        let segueDestination = segue.destination as? EmployeeViewController
+        let object = sender as? NSManagedObject
+        segueDestination?.object = object
     }
 }
 

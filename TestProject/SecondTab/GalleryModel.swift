@@ -14,12 +14,13 @@ class GalleryModel {
     
     func loadImages() {
         images = [#imageLiteral(resourceName: "1"), #imageLiteral(resourceName: "2"), #imageLiteral(resourceName: "3"), #imageLiteral(resourceName: "4"), #imageLiteral(resourceName: "5"), #imageLiteral(resourceName: "19"), #imageLiteral(resourceName: "6"), #imageLiteral(resourceName: "7"), #imageLiteral(resourceName: "8"), #imageLiteral(resourceName: "9"), #imageLiteral(resourceName: "10"), #imageLiteral(resourceName: "11"), #imageLiteral(resourceName: "12"), #imageLiteral(resourceName: "13"), #imageLiteral(resourceName: "14"), #imageLiteral(resourceName: "15"), #imageLiteral(resourceName: "16"), #imageLiteral(resourceName: "17"), #imageLiteral(resourceName: "18")]
+        getImages()
     }
     
     // TODO: - get images from local json
     private func getImages() {
         guard let json = open(file: "Images", ext: ".json") else { return }
-        _ = try! JSONDecoder().decode(Images.self, from: json)
+        let items = try! JSONDecoder().decode(Images.self, from: json)
     }
     
     private func open(file name: String, ext: String) -> Data? {
@@ -38,6 +39,3 @@ class GalleryModel {
 struct Images: Codable {
     var images: [String]
 }
-
-
-

@@ -51,3 +51,26 @@ struct ManagementFactory: CellFactory {
         cell.uniqueType.text = items[indexPath.row].value(forKey: "reception_hours") as? String
     }
 }
+
+struct SectionData {
+    let type: EmployeeType
+    let data : [NSManagedObject]
+    let factory: CellFactory
+    
+    var numberOfItems: Int {
+        return data.count
+    }
+    
+    subscript(index: Int) -> NSManagedObject {
+        return data[index]
+    }
+}
+
+extension SectionData {
+    
+    init(type: EmployeeType, factory: CellFactory, data: NSManagedObject...) {
+        self.type = type
+        self.data  = data
+        self.factory = factory
+    }
+}

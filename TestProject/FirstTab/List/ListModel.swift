@@ -11,6 +11,15 @@ import CoreData
 
 typealias CompletionHandlerClosureType = () -> Void?
 
+struct UserObject {
+    var name: String?
+    var salary: String?
+    var lunchTime: String?
+    var receptionHours: String?
+    var workplaceNumber: String?
+    var accountantType: String?
+}
+
 final class ListModel: EntityUser {
 
     var items: [NSManagedObject] = []

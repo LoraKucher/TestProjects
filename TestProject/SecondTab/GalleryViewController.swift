@@ -20,7 +20,7 @@ final class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        model.loadImages()
+        getImages()
         collectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
     }
     
@@ -33,6 +33,10 @@ final class GalleryViewController: UIViewController {
         collectionView.scrollToPreviousItem()
     }
     
+    // MARK: - Private methods
+    private func getImages() {
+        model.loadImages()
+    }
 }
 
 // MARK: - CollectionView datasource
