@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ImageCollectionViewCell: UICollectionViewCell {
+final class ImageCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var imageVIew: UIImageView!
+    @IBOutlet private weak var imageVIew: UIImageView!
+    
+    func configCell(with image: UIImage) {
+        imageVIew.image = image
+    }
 }

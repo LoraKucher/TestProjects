@@ -21,21 +21,29 @@ final class GalleryViewController: UIViewController {
         super.viewDidLoad()
         
         getImages()
-        collectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
+        registerCell()
     }
     
     // MARK: - Actions
     @IBAction private func nextButtonTouchUpInside(_ sender: UIButton) {
-        collectionView.scrollToNextItem()
+        scrollCell(with: .next(collectionView: collectionView))
     }
     
     @IBAction private func previousButtonTouchUpInside(_ sender: UIButton) {
-        collectionView.scrollToPreviousItem()
+        scrollCell(with: .previous(collectionView: collectionView))
     }
     
     // MARK: - Private methods
     private func getImages() {
         model.loadImages()
+    }
+    
+    private func scrollCell(with direction: Direction) {
+        direction.action()
+    }
+    
+    private func registerCell() {
+        collectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
     }
 }
 
@@ -51,11 +59,34 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
             preconditionFailure("cell is nil")
         }
         
-        cell.imageVIew.image = model.images[indexPath.row]
+        cell.configCell(with: model.images[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+}
+
+// MARK: - collection view direction
+enum Direction {
+    case next(collectionView: UICollectionView)
+    case previous(collectionView: UICollectionView)
+    
+    func action() {
+        switch self {
+            
+        case .next(collectionView: let collectionView):
+            guard let indexPath = collectionView.indexPathsForVisibleItems.first else {
+                return
+            }
+            collectionView.scrollToItem(at: IndexPath(row: indexPath.row + 1, section: indexPath.section), at: .centeredHorizontally, animated: true)
+            
+        case .previous(collectionView: let collectionView):
+            guard let indexPath = collectionView.indexPathsForVisibleItems.first else {
+                return
+            }
+            collectionView.scrollToItem(at: IndexPath(row: indexPath.row - 1, section: indexPath.section), at: .centeredHorizontally, animated: true)
+        }
     }
 }

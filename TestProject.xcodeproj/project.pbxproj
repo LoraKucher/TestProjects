@@ -24,8 +24,6 @@
 		98B2EFD323687D2B0071BF94 /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98B2EFD223687D2B0071BF94 /* Gallery.storyboard */; };
 		98B2EFD523687DEB0071BF94 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B2EFD423687DEB0071BF94 /* ListViewController.swift */; };
 		98B2EFD723687DFB0071BF94 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B2EFD623687DFB0071BF94 /* GalleryViewController.swift */; };
-		98CDCC372368E18300E5BA37 /* CenterCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDCC362368E18300E5BA37 /* CenterCollectionViewFlowLayout.swift */; };
-		98CDCC392368EA8D00E5BA37 /* UICollectionView+ScrollPreviousNextItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDCC382368EA8D00E5BA37 /* UICollectionView+ScrollPreviousNextItem.swift */; };
 		98CDCC3C23697F4300E5BA37 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDCC3A23697F4200E5BA37 /* ListTableViewCell.swift */; };
 		98CDCC3D23697F4300E5BA37 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CDCC3B23697F4200E5BA37 /* ListTableViewCell.xib */; };
 		98CDCC3F2369E6C400E5BA37 /* EmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDCC3E2369E6C400E5BA37 /* EmployeeViewController.swift */; };
@@ -54,8 +52,6 @@
 		98B2EFD223687D2B0071BF94 /* Gallery.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
 		98B2EFD423687DEB0071BF94 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		98B2EFD623687DFB0071BF94 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
-		98CDCC362368E18300E5BA37 /* CenterCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		98CDCC382368EA8D00E5BA37 /* UICollectionView+ScrollPreviousNextItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ScrollPreviousNextItem.swift"; sourceTree = "<group>"; };
 		98CDCC3A23697F4200E5BA37 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		98CDCC3B23697F4200E5BA37 /* ListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 		98CDCC3E2369E6C400E5BA37 /* EmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewController.swift; sourceTree = "<group>"; };
@@ -190,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				98CDCC352368E15700E5BA37 /* Extensions */,
-				98CDCC362368E18300E5BA37 /* CenterCollectionViewFlowLayout.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -199,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				9868A44C23688CF3008778A1 /* UIViewEx.swift */,
-				98CDCC382368EA8D00E5BA37 /* UICollectionView+ScrollPreviousNextItem.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -282,13 +276,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98CDCC392368EA8D00E5BA37 /* UICollectionView+ScrollPreviousNextItem.swift in Sources */,
 				98A3BAAE236C34A200F64D41 /* EntityUser.swift in Sources */,
 				98961EF023633CC9001F1AC0 /* AppDelegate.swift in Sources */,
 				9868A44D23688CF3008778A1 /* UIViewEx.swift in Sources */,
 				9868A45023688F95008778A1 /* ImageCollectionViewCell.swift in Sources */,
 				98B2EFD723687DFB0071BF94 /* GalleryViewController.swift in Sources */,
-				98CDCC372368E18300E5BA37 /* CenterCollectionViewFlowLayout.swift in Sources */,
 				98CDCC3F2369E6C400E5BA37 /* EmployeeViewController.swift in Sources */,
 				98A3BAA7236B92FC00F64D41 /* ListFactory.swift in Sources */,
 				98B2EFD523687DEB0071BF94 /* ListViewController.swift in Sources */,

@@ -16,6 +16,7 @@ final class EmployeeViewController: UIViewController, EntityUser {
     
     // MARK: - Public properties
     var object: NSManagedObject? = nil
+    weak var delegate: ReloadListViewContoller?
     
     // MARK: - Private properties
     private var type: EmployeeType = .employee
@@ -25,11 +26,16 @@ final class EmployeeViewController: UIViewController, EntityUser {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setTableView()
+    }
+    
+    // MARK: - Private methods
+    private func setTableView() {
         tableview.register(UINib(nibName: "EmployeeCell", bundle: nil), forCellReuseIdentifier: "employeeCell")
         tableview.tableFooterView = UIView()
     }
     
-    // MARK: - Private methods
+    // MARK: - Private actions
     @IBAction private func segmentValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0: type = .employee
@@ -45,7 +51,8 @@ final class EmployeeViewController: UIViewController, EntityUser {
         type.save(newUser: createUser(with: type), and: userObject)
         do {
             try returnContext().save()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadData"), object: nil)
+            delegate?.reload()
+            
             navigationController?.popViewController(animated: true)
         } catch {
             preconditionFailure("Failed saving")
@@ -68,6 +75,8 @@ extension EmployeeViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "employeeCell", for: indexPath) as? EmployeeCell else {
             preconditionFailure("cell is nil")
         }
+        
+        
         cell.descriptionTextField.tag = indexPath.row
         cell.descriptionTextField.delegate = self
         

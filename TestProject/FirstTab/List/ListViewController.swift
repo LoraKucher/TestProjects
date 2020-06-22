@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+protocol ReloadListViewContoller: class {
+    func reload()
+}
+
 final class ListViewController: UIViewController {
     
     // MARK: - Private IBOutlets
@@ -33,12 +37,7 @@ final class ListViewController: UIViewController {
         super.viewDidLoad()
         
         getData()
-        addObservers()
-        tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: "listCell")
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        registerCell()
     }
     
     // MARK: - Actions
@@ -49,8 +48,8 @@ final class ListViewController: UIViewController {
     }
     
     // MARK: - Private methods
-    private func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(getData), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
+    private func registerCell() {
+        tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: "listCell")
     }
     
     @objc private func getData() {
@@ -76,6 +75,17 @@ final class ListViewController: UIViewController {
         let segueDestination = segue.destination as? EmployeeViewController
         let object = sender as? NSManagedObject
         segueDestination?.object = object
+        segueDestination?.delegate = self
+        
+    }
+}
+
+// MARK: - ReloadListViewContoller delegate
+extension ListViewController: ReloadListViewContoller {
+    func reload() {
+        model.fetch { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }
 
